@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Global } from 'src/app/global';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html'
+    selector: 'app-root',
+    templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
     title: string;
@@ -14,7 +14,11 @@ export class AppComponent implements OnInit {
     selectedNewLine: string;
     selectedWarp: string;
     selectedBraces: string;
-    codeOptions: { lineNumbers: boolean; theme: string; mode: string; };
+    codeOptions: {
+        lineNumbers: boolean;
+        theme: string;
+        mode: string;
+    };
     code: string;
     options: any;
     global: Global;
@@ -33,23 +37,10 @@ export class AppComponent implements OnInit {
             theme: 'default',
             mode: 'javascript'
         };
-        this.code = `function findSequence(goal) {
-            function find(start, history) {
-              if (start == goal)
-                return history;
-              else if (start > goal)
-                return null;
-              else
-                return find(start + 5, "(" + history + " + 5)") ||
-                       find(start * 3, "(" + history + " * 3)");
-            }
-            return find(1, "1");
-          }`;
-
         this.options = {
             'indent_size': 4,
-            'indent_char': ' ', //
-            'eol': '\n', //
+            'indent_char': ' ',
+            'eol': '\n',
             'indent_level': 0,
             'max_preserve_newlines': 10,
             'wrap_line_length': 0,
@@ -81,24 +72,7 @@ export class AppComponent implements OnInit {
             indent: '    '
         };
         this.defaultOptions = this.global.underscore.clone(this.options);
-        this.languageDefaults = {
-            'indent_size': 4,
-            'html': {
-                'end_with_newline': true,
-                'js': {
-                    'indent_size': 2
-                },
-                'css': {
-                    'indent_size': 2
-                }
-            },
-            'css': {
-                'indent_size': 1
-            },
-            'js': {
-               'preserve-newlines': true
-            }
-        };
+        this.changeLanguageType();
     }
 
     beautify = () => {
@@ -113,10 +87,40 @@ export class AppComponent implements OnInit {
         this.resetDefault();
         if (this.selectedLanguageType === 'css') {
             this.options['indent_size'] = 1;
+            this.code = `body{font-family:Roboto!important;margin:0}
+            .table{width:100%;margin-bottom:1rem;color:#212529}
+            .table td,.table th{padding:.75rem;vertical-align:top;
+            border-top:1px solid #dee2e6}.title{height:60px}`;
         } else if (this.selectedLanguageType === 'html') {
             this.options['end_with_newline'] = true;
+            this.code = `<!doctype html><html lang="en"><head> <meta charset="utf-8">
+                <title>Angular Beautifier</title> <base href="/"> <meta name="viewport" content="width=device-width, initial-scale=1">
+                <link rel="icon" type="image/x-icon" href="favicon.ico"></head><body> <app-root></app-root></body></html>`;
         } else if (this.selectedLanguageType === 'js') {
             this.options['preserve-newlines'] = true;
+            this.code = `function findSequence(goal) {
+                function find(start, history) {
+                if (start == goal)
+                return history;
+                else if (start > goal)
+                return null;
+                else
+                return find(start + 5, "(" + history + " + 5)") ||
+                find(start * 3, "(" + history + " * 3)");
+                }
+                return find(1, "1");
+                }`;
+        } else if (this.selectedLanguageType === 'sql') {
+            this.code = `INSERT INTO employees (employee_id,  first_name,
+                last_name,    date_of_birth,
+                phone_number, junk)
+                SELECT GENERATE_SERIES
+                , initcap(lower(random_string(2, 8)))
+                , initcap(lower(random_string(2, 8)))
+                , CURRENT_DATE - CAST(floor(random() * 365 * 10 + 40 * 365) AS NUMERIC) * INTERVAL '1 DAY'
+                , CAST(floor(random() * 9000 + 1000) AS NUMERIC)
+                , 'junk'
+                FROM GENERATE_SERIES(1, 1000);`;
         }
     }
 
