@@ -1,0 +1,136 @@
+body{
+    font-family: 'Roboto' !important;
+    margin: 0px;
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+}
+
+.table td, .table th {
+    padding: .75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
+.title{
+    height: 60px;
+}
+
+#tabsize, #max-preserve-newlines, #wrap-line-length, #indent-level-length {
+    width: 100%;
+    padding: 0px !important;
+}
+
+#source {
+    min-height: 400px;
+    min-width: 100%;
+}
+
+.source-div{
+    padding: 10px;
+    padding-bottom: 0px;
+}
+
+#options {
+    height: calc(50vh - 227px);
+    overflow-y: auto;
+    width: calc(100% - 7px);
+    margin-bottom: 10px;
+    box-shadow: 0 2px 2px rgba(0,0,0,.24), 0 0 2px rgba(0,0,0,.12);
+    outline: none;
+    font-family: 'Roboto Mono';
+    font-size: 14px;
+}
+
+#code-area {
+    padding: 0px;
+    margin-bottom: 10px;
+    line-height: 1.5;
+    height: calc(100vh - 260px);
+    display: flex;
+    border-radius: 0px;
+    border: 1px solid #ccc;
+}
+
+ngx-codemirror{
+    width: 100%;
+}
+
+#selections-table{
+    margin-bottom: 0px;
+}
+
+#selections-table p {
+    font-weight: 500;
+    margin-bottom: 10px;
+    margin-top: 0px;
+}
+
+.select.mat-select {
+    border-radius: 2px;
+    max-height: 48px;
+    font-size: 16px;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    padding: 15px;
+    padding-right: 10px;
+    font-weight: 400;
+    color: #495057;
+    border: 1px solid #ced4da;
+    border-bottom: none;
+    width: auto;
+}
+
+#selections-table .select.mat-select {
+    width: calc(100% - 23px);
+    padding: 10px;
+    line-height: 15px;
+}
+
+#selections-table mat-expansion-panel {
+    border-radius: 2px;
+    border: 1px solid #ced4da;
+    border-bottom: none;
+}
+
+#selections-table .mat-expansion-panel mat-expansion-panel-header {
+    font-size: 16px;
+    padding: 0px 15px;
+    max-height: 48px !important;
+}
+
+#selections-table .mat-expansion-panel mat-expansion-panel-header .mat-expansion-indicator:after {
+    margin-top: -5px;
+}
+
+#selections-table .mat-expansion-panel-body{
+    padding: 0px;
+    font-size: 16px;
+}
+
+#selections-table td, #selections-table th {
+    padding: 15px;
+    user-select: none;
+}
+
+.beautify{
+    width: 100%;
+    height: 45px;
+    font-size: 16px;
+}
+
+.options-checkbox label.mat-checkbox-layout {
+    margin-bottom: 19px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.options-checkbox:last-child label.mat-checkbox-layout {
+    margin-bottom: 0px;
+}
+
+.mat-slider-disabled .mat-slider-thumb, .mat-slider-disabled .mat-slider-track-background, .mat-slider-disabled .mat-slider-track-fill {
+    background-color: rgba(0,0,0,.26) !important;
+}

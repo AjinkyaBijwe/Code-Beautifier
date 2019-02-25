@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en-US" dir="ltr">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="Content-type" content="text/html;charset=utf-8" />
+	<link rel="icon" href="web/favicon.png" type="image/png">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto:400,500,700" rel="stylesheet">
+</head>
+<body>
+	<mat-toolbar color="primary" class="title mat-elevation-z6">
+		Angular Code Beautify
+	</mat-toolbar>
+	<div id="selections-language" class="source-div">
+		<mat-select class="select" [(ngModel)]="selectedLanguageType" (ngModelChange)="changeLanguageType()" name="language" id="language">
+			<mat-option value="css">Beautify CSS</mat-option>
+			<mat-option value="html">Beautify HTML</mat-option>
+            <mat-option value="js">Beautify JavaScript</mat-option>
+            <mat-option value="sql">Beautify SQL</mat-option>
+		</mat-select>
+	</div>
+	<div id="selections-table" class="source-div">
+		<mat-expansion-panel>
+			<mat-expansion-panel-header>
+				<mat-panel-title>
+					{{selectedLanguageType === 'sql' ? 'SQL Options' : 'Advanced Options'}}
+				</mat-panel-title>
+            </mat-expansion-panel-header>
+            <table id="selections-table" class="table" *ngIf="selectedLanguageType === 'sql'">
+				<tr>
+                    <td>
+                        <p>Language Type</p>
+                        <mat-select class="select" [(ngModel)]="sqlOptions['language']" id="sql-type">
+                            <mat-option value="sql">Standard SQL</mat-option>
+                            <mat-option value="n1ql">Couchbase N1QL</mat-option>
+                            <mat-option value="db2">IBM DB2</mat-option>
+                            <mat-option value="pl/sql">Oracle PL/SQL</mat-option>
+                        </mat-select>
+                        <br>
+                    </td>
+                </tr>
+            </table>
+			<table id="selections-table" class="table" *ngIf="selectedLanguageType !== 'sql'">
+				<tr>
+					<td style="width: 30%;">
+						<p>Tab Size [Default Value is 4]</p>
+						<mat-checkbox [(ngModel)]="options['indent_with_tabs']">
+							Intend with tab
+						</mat-checkbox>
+                        <mat-slider min="4" max="32" step="2" thumbLabel tickInterval="2" [disabled]="options['indent_with_tabs']" 
+                        [(ngModel)]="options['indent_with_tabs'] ? 4 : options['indent_size']" name="tabsize" id="tabsize">
+						</mat-slider>
+						<br>
+						<p>New Line</p>
+						<mat-checkbox [(ngModel)]="options['preserve_newlines']">
+							Preserve new lines
+						</mat-checkbox>
+                        <mat-slider min="0" max="10" step="1" thumbLabel tickInterval="1" [disabled]="!options['preserve_newlines']" 
+                        [(ngModel)]="options['max_preserve_newlines']" name="max-preserve-newlines" id="max-preserve-newlines">
+						</mat-slider>
+						<br>
+						<p>Wrap lines that exceed N characters [Default Value is 0]</p>
+                        <mat-slider min="0" max="160" step="10" thumbLabel tickInterval="10" [(ngModel)]="options['wrap_line_length']" 
+                        name="wrap-line-length" id="wrap-line-length">
+						</mat-slider>
+                        <br>
+						<p>Initial Indentation Level [Default Value is 0]</p>
+                        <mat-slider min="0" max="100" step="10" thumbLabel tickInterval="10" [(ngModel)]="options['indent_level']" 
+                        name="indent-level-length" id="indent-level-length">
+                        </mat-slider>
+                        <br>
+						<p>HTML &lt;style&gt;, &lt;script&gt; formatting:</p>
+						<mat-select class="select" [(ngModel)]="options['indent_scripts']" id="indent-scripts">
+							<mat-option value="keep">Keep indent level of the tag</mat-option>
+							<mat-option value="normal">Add one indent level</mat-option>
+							<mat-option value="separate">Separate indentation</mat-option>
+                        </mat-select>
+                        <br>
+                        <br>
+						<p>Brace Styles</p>
+						<mat-select class="select" [(ngModel)]="options['brace_style']" id="brace-style">
+							<mat-option value="collapse">Braces with control statement</mat-option>
+							<mat-option value="expand">Braces on own line</mat-option>
+							<mat-option value="end-expand">End braces on own line</mat-option>
+							<mat-option value="none">Attempt to keep braces where they are</mat-option>
+						</mat-select>
+                        <br>
+                        <br>
+						<p>Operator Position</p>
+						<mat-select class="select" [(ngModel)]="options['operator_position']" id="operator-style">
+							<mat-option value="before-newline">Before Newline</mat-option>
+							<mat-option value="after-newline">After Newline</mat-option>
+							<mat-option value="preserve-newline">Preserve Newline</mat-option>
+                        </mat-select>
+					</td>
+					<td style="width: 30%;">
+						<p>Options</p>
+						<mat-checkbox class="options-checkbox" [(ngModel)]="options['space_in_paren']">
+							Add padding spaces within paren, ie. f( a, b )
+						</mat-checkbox>
+						<br>
+						<mat-checkbox class="options-checkbox" [(ngModel)]="options['space_in_empty_paren']">
+							Add a single space inside empty paren, ie. f( )
+						</mat-checkbox>
+						<br>
+						<mat-checkbox class="options-checkbox" [(ngModel)]="options['editorconfig']">
+							Use EditorConfig to set up the options
+						</mat-checkbox>
+						<br>
+						<mat-checkbox class="options-checkbox" [(ngModel)]="options['space_after_anon_function']">
+							Add a space before an anonymous function's parens, ie. function ()
+						</mat-checkbox>
+						<br>
+						<mat-checkbox class="options-checkbox" [(ngModel)]="options['space_after_named_function']">
+							Add a space before a named function's parens, i.e. function example ()
+						</mat-checkbox>
+						<br>
+						<mat-checkbox class="options-checkbox" [(ngModel)]="options['e4x']">
+							Support e4x/jsx syntax
+						</mat-checkbox>
+						<br>
+						<mat-checkbox class="options-checkbox" [(ngModel)]="options['comma_first']">
+							Use comma-first list style?
+						</mat-checkbox>
+						<br>
+						<mat-checkbox class="options-checkbox" [(ngModel)]="options['']">
+							Preserve inline braces/code blocks?
+						</mat-checkbox>
+						<br>
+						<mat-checkbox class="options-checkbox" [(ngModel)]="options['keep_array_indentation']">
+							Keep array indentation?
+						</mat-checkbox>
+						<br>
+						<mat-checkbox class="options-checkbox" [(ngModel)]="options['break_chained_methods']">
+							Break lines on chained methods?
+						</mat-checkbox>
+						<br>
+						<mat-checkbox class="options-checkbox" [(ngModel)]="options['space_before_conditional']">
+							Space before conditional: "if(x)" / "if (x)"
+						</mat-checkbox>
+						<br>
+						<mat-checkbox class="options-checkbox" [(ngModel)]="options['unescape_strings']">
+							Unescape printable chars encoded as \xNN or \uNNNN?
+						</mat-checkbox>
+						<br>
+						<mat-checkbox class="options-checkbox" [(ngModel)]="options['jslint_happy']">
+							Use JSLint-happy formatting tweaks?
+						</mat-checkbox>
+						<br>
+						<mat-checkbox class="options-checkbox" [(ngModel)]="options['indent-inner-html']">
+							Indent &lt;head&gt; and &lt;body&gt; sections?
+						</mat-checkbox>
+					</td>
+					<td style="width: 40%;">
+						<p>Additional Settings (JSON):</p>
+						<textarea id="options">{}</textarea>
+						<span id="additional-options-error" hidden style="margin:6px 0 0 0; color:red ">Could Not Parse JSON!</span>
+						<p>Your Selected Options (JSON):</p>
+						<textarea readonly id="options">{}</textarea>
+						<button mat-raised-button color="warn" class="default" (click)="resetDefault()" style="width: 100%;">Reset to Default</button>
+					</td>
+				</tr>
+			</table>
+		</mat-expansion-panel>
+	</div>
+	<div style="line-height: 0" class="source-div">
+		<mat-card id="code-area">
+			<ngx-codemirror [(ngModel)]="code" [autoFocus]="true" [options]="codeOptions">
+			</ngx-codemirror>
+		</mat-card>
+		<button mat-raised-button color="primary" class="beautify" (click)="beautify()" style="text-transform: uppercase;">
+            Beautify {{selectedLanguageType}} Code
+        </button>
+	</div>
+</body>
+</html>
