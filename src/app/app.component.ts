@@ -25,12 +25,15 @@ export class AppComponent implements OnInit {
     languageDefaults: any;
     defaultOptions: any;
     sqlOptions: any;
+    data: any;
+    darkMode: boolean;
 
     constructor(global: Global) {
         this.global = global;
     }
 
     ngOnInit() {
+        this.darkMode  = false;
         this.selectedLanguageType = 'js';
         this.codeOptions = {
             lineNumbers: true,
@@ -69,7 +72,8 @@ export class AppComponent implements OnInit {
         };
         this.sqlOptions = {
             language: 'sql',
-            indent: '    '
+            indentation: 4,
+            upperCase: false,
         };
         this.defaultOptions = this.global.underscore.clone(this.options);
         this.changeLanguageType();
@@ -77,7 +81,14 @@ export class AppComponent implements OnInit {
 
     beautify = () => {
         if (this.selectedLanguageType === 'sql') {
+            if (this.sqlOptions['upperCase']) {
+                this.code = this.code.toUpperCase();
+            }
+            const indent = '\xa0';
+            this.sqlOptions['indent'] = indent.repeat(this.sqlOptions['indentation']);
             this.code = this.global.sqlFormatter(this.code, this.sqlOptions);
+        } else if (this.selectedLanguageType === 'json') {
+            this.code = this.global.beautify['js'](this.code, this.options);
         } else {
             this.code = this.global.beautify[this.selectedLanguageType](this.code, this.options);
         }
@@ -85,46 +96,37 @@ export class AppComponent implements OnInit {
 
     changeLanguageType = () => {
         this.resetDefault();
-        if (this.selectedLanguageType === 'css') {
-            this.options['indent_size'] = 1;
-            this.code = `body{font-family:Roboto!important;margin:0}
-            .table{width:100%;margin-bottom:1rem;color:#212529}
-            .table td,.table th{padding:.75rem;vertical-align:top;
-            border-top:1px solid #dee2e6}.title{height:60px}`;
-        } else if (this.selectedLanguageType === 'html') {
-            this.options['end_with_newline'] = true;
-            this.code = `<!doctype html><html lang="en"><head> <meta charset="utf-8">
-                <title>Angular Beautifier</title> <base href="/"> <meta name="viewport" content="width=device-width, initial-scale=1">
-                <link rel="icon" type="image/x-icon" href="favicon.ico"></head><body> <app-root></app-root></body></html>`;
-        } else if (this.selectedLanguageType === 'js') {
-            this.options['preserve-newlines'] = true;
-            this.code = `function findSequence(goal) {
-                function find(start, history) {
-                if (start == goal)
-                return history;
-                else if (start > goal)
-                return null;
-                else
-                return find(start + 5, "(" + history + " + 5)") ||
-                find(start * 3, "(" + history + " * 3)");
-                }
-                return find(1, "1");
-                }`;
-        } else if (this.selectedLanguageType === 'sql') {
-            this.code = `INSERT INTO employees (employee_id,  first_name,
-                last_name,    date_of_birth,
-                phone_number, junk)
-                SELECT GENERATE_SERIES
-                , initcap(lower(random_string(2, 8)))
-                , initcap(lower(random_string(2, 8)))
-                , CURRENT_DATE - CAST(floor(random() * 365 * 10 + 40 * 365) AS NUMERIC) * INTERVAL '1 DAY'
-                , CAST(floor(random() * 9000 + 1000) AS NUMERIC)
-                , 'junk'
-                FROM GENERATE_SERIES(1, 1000);`;
+        this.data = this.global.data;
+        switch (this.selectedLanguageType) {
+            case 'html':
+                this.options['end_with_newline'] = true;
+                this.code = this.data['html'];
+            break;
+            case 'css':
+                this.options['indent_size'] = 1;
+                this.code = this.data['css'];
+            break;
+            case 'js':
+                this.options['preserve-newlines'] = true;
+                this.code = this.data['js'];
+            break;
+            case 'sql':
+                this.code = this.data['sql'];
+            break;
+            case 'json':
+                this.code = this.data['json'];
+            break;
+            default:
+            break;
         }
     }
 
     resetDefault = () => {
         this.options = this.global.underscore.assign({}, this.defaultOptions);
     }
+
+    validateJSON = (event) => {
+        this.options = JSON.parse(event);
+    }
 }
+

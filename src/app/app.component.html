@@ -1,14 +1,9 @@
-<!doctype html>
-<html lang="en-US" dir="ltr">
-<head>
-	<meta charset="utf-8" />
-	<meta http-equiv="Content-type" content="text/html;charset=utf-8" />
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto:400,500,700" rel="stylesheet">
-</head>
-<body>
+<div [ngClass]="{'dark-theme': darkMode}">
 	<mat-toolbar color="primary" class="title mat-elevation-z6">
 		Angular Code Beautifier
+		<mat-slide-toggle class="theme-toggle" [(ngModel)]="darkMode">
+			Dark Mode
+		</mat-slide-toggle>
 	</mat-toolbar>
 	<div id="selections-language" class="source-div">
 		<mat-select class="select" [(ngModel)]="selectedLanguageType" (ngModelChange)="changeLanguageType()" name="language" id="language">
@@ -16,6 +11,7 @@
 			<mat-option value="html">Beautify HTML</mat-option>
             <mat-option value="js">Beautify JavaScript</mat-option>
             <mat-option value="sql">Beautify SQL</mat-option>
+            <mat-option value="json">Beautify JSON</mat-option>
 		</mat-select>
 	</div>
 	<div id="selections-table" class="source-div">
@@ -25,7 +21,7 @@
 					{{selectedLanguageType === 'sql' ? 'SQL Options' : 'Advanced Options'}}
 				</mat-panel-title>
             </mat-expansion-panel-header>
-            <table id="selections-table" class="table" *ngIf="selectedLanguageType === 'sql'">
+            <table id="selections-table" class="table sql" *ngIf="selectedLanguageType === 'sql'">
 				<tr>
                     <td>
                         <p>Language Type</p>
@@ -37,11 +33,23 @@
                         </mat-select>
                         <br>
                     </td>
+                    <td>
+                    	<p>Intendation Size [Default Value is 4]</p>
+                        <mat-slider min="0" max="32" step="2" thumbLabel tickInterval="2" [(ngModel)]="sqlOptions['indentation']" 
+                        	name="tabsize" id="tabsize">
+						</mat-slider>
+                    </td>
+                    <td>
+                    	<p style="margin-bottom: 20px;">Options</p>
+						<mat-checkbox [(ngModel)]="sqlOptions['upperCase']">
+							Convert to UpperCase
+						</mat-checkbox>
+                    </td>
                 </tr>
             </table>
 			<table id="selections-table" class="table" *ngIf="selectedLanguageType !== 'sql'">
 				<tr>
-					<td style="width: 30%;">
+					<td>
 						<p>Tab Size [Default Value is 4]</p>
 						<mat-checkbox [(ngModel)]="options['indent_with_tabs']">
 							Intend with tab
@@ -92,7 +100,7 @@
 							<mat-option value="preserve-newline">Preserve Newline</mat-option>
                         </mat-select>
 					</td>
-					<td style="width: 30%;">
+					<td>
 						<p>Options</p>
 						<mat-checkbox class="options-checkbox" [(ngModel)]="options['space_in_paren']">
 							Add padding spaces within paren, ie. f( a, b )
@@ -122,10 +130,6 @@
 							Use comma-first list style?
 						</mat-checkbox>
 						<br>
-						<mat-checkbox class="options-checkbox" [(ngModel)]="options['']">
-							Preserve inline braces/code blocks?
-						</mat-checkbox>
-						<br>
 						<mat-checkbox class="options-checkbox" [(ngModel)]="options['keep_array_indentation']">
 							Keep array indentation?
 						</mat-checkbox>
@@ -150,26 +154,25 @@
 							Indent &lt;head&gt; and &lt;body&gt; sections?
 						</mat-checkbox>
 					</td>
-					<td style="width: 40%;">
-						<p>Additional Settings (JSON):</p>
-						<textarea id="options">{}</textarea>
-						<span id="additional-options-error" hidden style="margin:6px 0 0 0; color:red ">Could Not Parse JSON!</span>
+					<td>
 						<p>Your Selected Options (JSON):</p>
-						<textarea readonly id="options">{}</textarea>
-						<button mat-raised-button color="warn" class="default" (click)="resetDefault()" style="width: 100%;">Reset to Default</button>
+                        <textarea id="options" spellcheck="false" [ngModel]="options | json" (ngModelChange)="validateJSON($event)" rows="29">
+                            {{options | json}}
+                        </textarea>
+                        <button mat-raised-button color="warn" class="default" (click)="resetDefault()" style="width: 100%;">
+                            Reset to Default
+                        </button>
 					</td>
 				</tr>
 			</table>
 		</mat-expansion-panel>
 	</div>
-	<div style="line-height: 0" class="source-div">
+	<div class="source-div">
 		<mat-card id="code-area">
-			<ngx-codemirror [(ngModel)]="code" [autoFocus]="true" [options]="codeOptions">
-			</ngx-codemirror>
+			<ngx-codemirror [(ngModel)]="code" [autoFocus]="true" [options]="codeOptions" [ngClass]="{'dark-theme': darkMode}"></ngx-codemirror>
 		</mat-card>
 		<button mat-raised-button color="primary" class="beautify" (click)="beautify()" style="text-transform: uppercase;">
             Beautify {{selectedLanguageType}} Code
         </button>
 	</div>
-</body>
-</html>
+</div>
