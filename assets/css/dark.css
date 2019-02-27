@@ -1,0 +1,106 @@
+.dark-theme #selections-table mat-expansion-panel {
+    background: #3e3e3e;
+    color: #fff !important;
+    border-color: #757575;
+}
+
+.dark-theme .mat-expansion-panel-header-title {
+  color: #fff;
+}
+
+.dark-theme .table {
+  color: #fff;
+  background: #4a4a4a;
+}
+
+.dark-theme .table td,
+.dark-theme .table th {
+  border-color: #757575;
+}
+
+.dark-theme .select.mat-select,
+.dark-theme input.material-input {
+  color: #fff !important;
+  background: #3e3e3e;
+  box-shadow: 0 3px 1px -2px rgba(255, 255, 255, 0.2), 0 2px 2px 0 rgba(255, 255, 255, 0.14), 0 1px 5px 0 rgba(255, 255, 255, 0.12);
+  border-color: #757575;
+}
+
+.dark-theme #options {
+  background: #636161;
+  border-color: #353535;
+  color: #fff;
+}
+
+.dark-theme .mat-select-value {
+  color: #fff;
+}
+
+.dark-theme .mat-select-arrow {
+  color: rgba(255, 255, 255, 0.54);
+}
+
+.dark-theme .mat-expansion-indicator::after,
+.dark-theme .mat-expansion-panel-header-description {
+  color: rgba(255, 255, 255, 0.54);
+}
+
+.dark-theme .mat-slider-track-background {
+  background-color: rgba(255, 255, 255, 0.56) !important;
+}
+
+.dark-theme .mat-checkbox-frame {
+  background: rgba(255, 255, 255, 0.54);
+}
+
+.dark-theme .mat-option {
+  background: #636161;
+  color: #fff;
+}
+
+.dark-theme .mat-select-panel .mat-option.mat-selected:not(.mat-option-multiple) {
+  background: #8a8a8a;
+  color: #fff;
+}
+
+.dark-theme .mat-option:focus:not(.mat-option-disabled),
+.dark-theme .mat-option:hover:not(.mat-option-disabled) {
+  background: #8a8a8a;
+}
+
+.dark-theme{
+  background: #505050;
+}
+
+.dark-theme .mat-toolbar.mat-primary {
+    background: #3a3a3a;
+    box-shadow: 0 3px 5px -1px rgba(255, 255, 255, 0.2),
+    0 6px 10px 0 rgba(255, 255, 255, 0.14),
+    0 1px 18px 0 rgba(255, 255, 255, 0.12);
+}
+
+.dark-theme .mat-fab.mat-primary,
+.dark-theme .mat-flat-button.mat-primary,
+.dark-theme .mat-mini-fab.mat-primary,
+.dark-theme .mat-raised-button.mat-primary {
+  background-color: #212121;
+}
+
+.dark-theme ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+  background: rgb(88, 88, 88);
+}
+
+/* Track */
+.dark-theme ::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Handle */
+.dark-theme ::-webkit-scrollbar-thumb {
+  background: #9b9b9b;
+  border-radius: 0px;
+  cursor: pointer;
+}

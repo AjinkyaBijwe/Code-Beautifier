@@ -78,6 +78,8 @@ THE SOFTWARE.
 
 @angular/material/select
 
+@angular/material/slide-toggle
+
 @angular/material/slider
 
 @angular/material/snack-bar
