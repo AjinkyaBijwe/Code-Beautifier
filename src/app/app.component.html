@@ -6,12 +6,13 @@
 		</mat-slide-toggle>
 	</mat-toolbar>
 	<div id="selections-language" class="source-div">
-		<mat-select class="select" [(ngModel)]="selectedLanguageType" (ngModelChange)="changeLanguageType()" name="language" id="language">
+		<mat-select class="select" [(ngModel)]="selectedLanguageType" (ngModelChange)="changeLanguageType()" 
+			panelClass="{{darkMode ? 'dark-theme' : ''}}" name="language" id="language">
 			<mat-option value="css">Beautify CSS</mat-option>
 			<mat-option value="html">Beautify HTML</mat-option>
             <mat-option value="js">Beautify JavaScript</mat-option>
-            <mat-option value="sql">Beautify SQL</mat-option>
-            <mat-option value="json">Beautify JSON</mat-option>
+			<mat-option value="json">Beautify JSON</mat-option>
+			<mat-option value="sql">Beautify SQL</mat-option>
 		</mat-select>
 	</div>
 	<div id="selections-table" class="source-div">
@@ -25,7 +26,7 @@
 				<tr>
                     <td>
                         <p>Language Type</p>
-                        <mat-select class="select" [(ngModel)]="sqlOptions['language']" id="sql-type">
+                        <mat-select class="select" [(ngModel)]="sqlOptions['language']" panelClass="{{darkMode ? 'dark-theme' : ''}}" id="sql-type">
                             <mat-option value="sql">Standard SQL</mat-option>
                             <mat-option value="n1ql">Couchbase N1QL</mat-option>
                             <mat-option value="db2">IBM DB2</mat-option>
@@ -77,7 +78,7 @@
                         </mat-slider>
                         <br>
 						<p>HTML &lt;style&gt;, &lt;script&gt; formatting:</p>
-						<mat-select class="select" [(ngModel)]="options['indent_scripts']" id="indent-scripts">
+						<mat-select class="select" [(ngModel)]="options['indent_scripts']" panelClass="{{darkMode ? 'dark-theme' : ''}}" id="indent-scripts">
 							<mat-option value="keep">Keep indent level of the tag</mat-option>
 							<mat-option value="normal">Add one indent level</mat-option>
 							<mat-option value="separate">Separate indentation</mat-option>
@@ -85,7 +86,7 @@
                         <br>
                         <br>
 						<p>Brace Styles</p>
-						<mat-select class="select" [(ngModel)]="options['brace_style']" id="brace-style">
+						<mat-select class="select" [(ngModel)]="options['brace_style']" panelClass="{{darkMode ? 'dark-theme' : ''}}" id="brace-style">
 							<mat-option value="collapse">Braces with control statement</mat-option>
 							<mat-option value="expand">Braces on own line</mat-option>
 							<mat-option value="end-expand">End braces on own line</mat-option>
@@ -94,7 +95,7 @@
                         <br>
                         <br>
 						<p>Operator Position</p>
-						<mat-select class="select" [(ngModel)]="options['operator_position']" id="operator-style">
+						<mat-select class="select" [(ngModel)]="options['operator_position']" panelClass="{{darkMode ? 'dark-theme' : ''}}" id="operator-style">
 							<mat-option value="before-newline">Before Newline</mat-option>
 							<mat-option value="after-newline">After Newline</mat-option>
 							<mat-option value="preserve-newline">Preserve Newline</mat-option>
@@ -169,7 +170,7 @@
 	</div>
 	<div class="source-div">
 		<mat-card id="code-area">
-			<ngx-codemirror [(ngModel)]="code" [autoFocus]="true" [options]="codeOptions" [ngClass]="{'dark-theme': darkMode}"></ngx-codemirror>
+			<ngx-codemirror [(ngModel)]="code" [autoFocus]="true" [options]="codeOptions"></ngx-codemirror>
 		</mat-card>
 		<button mat-raised-button color="primary" class="beautify" (click)="beautify()" style="text-transform: uppercase;">
             Beautify {{selectedLanguageType}} Code

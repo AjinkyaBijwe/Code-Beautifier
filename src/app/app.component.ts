@@ -107,7 +107,7 @@ export class AppComponent implements OnInit {
                 this.code = this.data['css'];
             break;
             case 'js':
-                this.options['preserve-newlines'] = true;
+                this.options['preserve_newlines'] = true;
                 this.code = this.data['js'];
             break;
             case 'sql':
