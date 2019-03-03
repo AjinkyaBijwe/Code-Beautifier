@@ -1,4 +1,4 @@
-# Angular Code Beautifier
+# [Angular Code Beautifier](https://ajinkyabijwe.github.io/Angular-Code-Beautifier/ "Angular Code Beautifier")
 
 This project is made with latest Angular 7 using open source library js-beautify, code mirror and sql-formatter.
 HTML, CSS, JS or SQL code can be beautified. Project also includes advance options for minor tweaking.
@@ -9,11 +9,11 @@ https://ajinkyabijwe.github.io/Angular-Code-Beautifier/
 
 ## Supported Langauges
 
-1.  HTML
-2.  CSS
-3.  JS
-4.  SQL
-5.  JSON
+- HTML
+- CSS
+- JS
+- SQL
+- JSON
 
 ## Installation
 
