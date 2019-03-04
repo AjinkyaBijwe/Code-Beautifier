@@ -1,9 +1,12 @@
 <div [ngClass]="{'dark-theme': darkMode}">
 	<mat-toolbar color="primary" class="title mat-elevation-z6">
-		Angular Code Beautifier
-		<mat-slide-toggle class="theme-toggle" [(ngModel)]="darkMode">
-			Dark Mode
-		</mat-slide-toggle>
+        Angular Code Beautifier
+        <mat-slide-toggle class="theme-toggle" [(ngModel)]="darkMode" (change)="setLocalStorage('darkMode', darkMode)">
+            Dark Mode
+        </mat-slide-toggle>
+        <button mat-raised-button color="warn" class="reset" (click)="clearStorageOptions()" style="text-transform: uppercase;">
+            Reset Storage
+        </button>
 	</mat-toolbar>
 	<div id="selections-language" class="source-div">
 		<mat-select class="select" [(ngModel)]="selectedLanguageType" (ngModelChange)="changeLanguageType()" 
@@ -170,7 +173,7 @@
 	</div>
 	<div class="source-div">
 		<mat-card id="code-area">
-			<ngx-codemirror [(ngModel)]="code" [autoFocus]="true" [options]="codeOptions"></ngx-codemirror>
+			<ngx-codemirror [(ngModel)]="code" [autoFocus]="true" [options]="codeOptions" (ngModelChange)="setLocalStorage('code', code)"></ngx-codemirror>
 		</mat-card>
 		<button mat-raised-button color="primary" class="beautify" (click)="beautify()" style="text-transform: uppercase;">
             Beautify {{selectedLanguageType}} Code

@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CodemirrorModule } from '@ctrl/ngx-codemirror';
 import 'codemirror/mode/javascript/javascript';
+import 'codemirror/mode/htmlmixed/htmlmixed';
+import 'codemirror/mode/css/css';
+import 'codemirror/mode/sql/sql';
 import 'codemirror/mode/markdown/markdown';
 
 import {
@@ -46,10 +49,12 @@ import {
     MatTooltipModule,
     MatTreeModule,
   } from '@angular/material';
+import { ConfirmResetComponent } from './confirm-reset/confirm-reset.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ConfirmResetComponent
   ],
   imports: [
     BrowserModule,
@@ -96,6 +101,7 @@ import {
     MatTreeModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  entryComponents: [ConfirmResetComponent],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
