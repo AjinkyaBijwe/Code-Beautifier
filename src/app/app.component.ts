@@ -147,7 +147,7 @@ export class AppComponent implements OnInit {
         this.options = JSON.parse(event);
     }
 
-    setLocalStorage = (key, value) =>{
+    setLocalStorage = (key, value) => {
         let settings;
         if (key) {
             settings = JSON.parse(localStorage.getItem('beautifierSettings'));
