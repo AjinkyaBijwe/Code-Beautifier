@@ -267,11 +267,12 @@ input.material-input {
 }
 
 .CodeMirror-linenumber {
-	padding: 0 3px 0 2px;
-	min-width: 20px;
-	text-align: right;
-	color: #999;
-	white-space: nowrap;
+    padding: 0px 5px 0px 4px;
+    min-width: 20px;
+    font-size: 13px;
+    text-align: right;
+    color: #999;
+    white-space: nowrap;
 }
 
 .CodeMirror-guttermarker {

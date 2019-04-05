@@ -173,7 +173,9 @@
 	</div>
 	<div class="source-div">
 		<mat-card id="code-area">
-			<ngx-codemirror [(ngModel)]="code" [autoFocus]="true" [options]="codeOptions" (ngModelChange)="setLocalStorage('code', code)"></ngx-codemirror>
+            <ngx-codemirror [(ngModel)]="code" [autoFocus]="true" [options]="codeOptions" 
+                (ngModelChange)="setLocalStorage('code', code)" (paste)="codeChanged = true;">
+            </ngx-codemirror>
 		</mat-card>
 		<button mat-raised-button color="primary" class="beautify" (click)="beautify()" style="text-transform: uppercase;">
             Beautify {{selectedLanguageType}} Code

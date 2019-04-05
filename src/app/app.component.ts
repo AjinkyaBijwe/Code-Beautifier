@@ -16,9 +16,10 @@ export class AppComponent implements OnInit {
     languageDefaults: any;
     defaultOptions: any;
     sqlOptions: any;
-    data: any;
+    globalData: any;
     darkMode: boolean;
     selectedLanguageType: string;
+    codeChanged: boolean;
 
     constructor(global: Global, dialog: MatDialog) {
         this.global = global;
@@ -26,6 +27,7 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.globalData = this.global.data;
         this.codeOptions = {
             lineNumbers: true,
             theme: 'default',
@@ -58,6 +60,7 @@ export class AppComponent implements OnInit {
 
     setOptions = () => {
         this.darkMode = false;
+        this.codeChanged = false;
         this.selectedLanguageType = 'js';
         this.options = {
             'indent_size': 4,
@@ -104,36 +107,38 @@ export class AppComponent implements OnInit {
         this.selectedLanguageType = settings['selectedLanguage'];
         this.codeOptions['mode'] = settings['codeEditorMode'];
         this.code = settings['code'];
+        if (this.code === this.globalData[this.selectedLanguageType]) {
+            this.codeChanged = false;
+        } else{
+            this.codeChanged = true;
+        }
     }
 
     changeLanguageType = () => {
-        this.data = this.global.data;
         switch (this.selectedLanguageType) {
             case 'html':
                 this.options['end_with_newline'] = true;
-                this.code = this.data['html'];
                 this.codeOptions['mode'] = 'htmlmixed';
             break;
             case 'css':
                 this.options['indent_size'] = 1;
-                this.code = this.data['css'];
                 this.codeOptions['mode'] = 'css';
             break;
             case 'js':
                 this.options['preserve_newlines'] = true;
-                this.code = this.data['js'];
                 this.codeOptions['mode'] = 'javascript';
             break;
             case 'sql':
-                this.code = this.data['sql'];
                 this.codeOptions['mode'] = 'sql';
             break;
             case 'json':
-                this.code = this.data['json'];
                 this.codeOptions['mode'] = 'application/json';
             break;
             default:
             break;
+        }
+        if (!this.codeChanged) {
+            this.code = this.globalData[this.selectedLanguageType];
         }
         this.setLocalStorage(null, null);
     }
