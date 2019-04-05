@@ -1,5 +1,5 @@
 {
-  "name": "my-app",
+  "name": "angular-code-beautifier",
   "version": "3.0.0",
   "scripts": {
     "ng": "ng",
