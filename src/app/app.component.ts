@@ -109,7 +109,7 @@ export class AppComponent implements OnInit {
         this.code = settings['code'];
         if (this.code === this.globalData[this.selectedLanguageType]) {
             this.codeChanged = false;
-        } else{
+        } else {
             this.codeChanged = true;
         }
     }
@@ -157,6 +157,9 @@ export class AppComponent implements OnInit {
         if (key) {
             settings = JSON.parse(localStorage.getItem('beautifierSettings'));
             settings[key] = value;
+            if (key === 'code') {
+                this.codeChanged = true;
+            }
         } else {
             settings = {
                 'darkMode': this.darkMode,
@@ -167,10 +170,10 @@ export class AppComponent implements OnInit {
                 'code': this.code
             };
         }
-        localStorage.setItem('beautifierSettings', JSON.stringify(settings))
+        localStorage.setItem('beautifierSettings', JSON.stringify(settings));
     }
 
-    clearStorageOptions = () =>{
+    clearStorageOptions = () => {
         const className = this.darkMode ? 'confirmation-dark' : 'confirmation';
         const dialogRef = this.dialog.open(ConfirmResetComponent, {
             panelClass: className,
