@@ -1,16 +1,11 @@
 .dark-theme {
-	background: #505050;
+	background: #6c6c6c;
 }
 
 .dark-theme #selections-table mat-expansion-panel {
-	background: #3e3e3e;
+	background: linear-gradient(to bottom,#3a3a3a,#555)!important;
 	color: #fff !important;
 	border-color: #757575;
-	box-shadow: 0 3px 1px -2px rgba(255, 255, 255, 0.2), 0 2px 2px 0 rgba(255, 255, 255, 0.14), 0 1px 5px 0 rgba(255, 255, 255, 0.12);
-}
-
-.dark-theme #code-area {
-	box-shadow: 0 3px 1px -2px rgba(255, 255, 255, 0.2), 0 2px 2px 0 rgba(255, 255, 255, 0.14), 0 1px 5px 0 rgba(255, 255, 255, 0.12);
 }
 
 .dark-theme .mat-expansion-panel-header-title {
@@ -30,8 +25,7 @@
 .dark-theme .select.mat-select,
 .dark-theme input.material-input {
 	color: #fff !important;
-	background: #3e3e3e;
-	box-shadow: 0 3px 1px -2px rgba(255, 255, 255, 0.2), 0 2px 2px 0 rgba(255, 255, 255, 0.14), 0 1px 5px 0 rgba(255, 255, 255, 0.12);
+	background: linear-gradient(to bottom,#3a3a3a,#555)!important;
 	border-color: #757575;
 }
 
@@ -39,7 +33,6 @@
 	background: #636161;
 	border: 1px solid #757575;
 	color: #fff;
-	box-shadow: 0 3px 1px -2px rgba(255, 255, 255, 0.2), 0 2px 2px 0 rgba(255, 255, 255, 0.14), 0 1px 5px 0 rgba(255, 255, 255, 0.12);
 }
 
 .dark-theme .mat-select-value {
@@ -84,15 +77,19 @@
 }
 
 .dark-theme .mat-toolbar.mat-primary {
-	background: #3a3a3a;
+	background: linear-gradient(to bottom,#3a3a3a,#555)!important;
 	box-shadow: 0 3px 5px -1px rgba(255, 255, 255, 0.2),
 		0 6px 10px 0 rgba(255, 255, 255, 0.14),
 		0 1px 18px 0 rgba(255, 255, 255, 0.12);
 }
 
-.dark-theme .mat-raised-button {
-    background-color: #212121;
+.dark-theme .mat-raised-button.mat-primary {
+    background: linear-gradient(to bottom,#3a3a3a,#555)!important;
     box-shadow: 0 3px 1px -2px rgba(255, 255, 255, 0.2), 0 2px 2px 0 rgba(255, 255, 255, 0.14), 0 1px 5px 0 rgba(255, 255, 255, 0.12);
+}
+
+.dark-theme .mat-raised-button.mat-warn {
+    background: #2e2e2e !important;
 }
 
 .dark-theme ::-webkit-scrollbar {
@@ -163,7 +160,7 @@
 
 /* Dark Theme Start */
 .dark-theme .CodeMirror {
-	background: #272822;
+	background: #232323;
 	color: #f8f8f2;
 }
 
@@ -184,7 +181,7 @@
 }
 
 .dark-theme .CodeMirror-gutters {
-	background: #3c3c3c;
+	background: #333333;
 	border-right: 0px;
 }
 
@@ -193,11 +190,11 @@
 }
 
 .dark-theme .CodeMirror-guttermarker-subtle {
-	color: #ababab;
+	color: #fff;
 }
 
 .dark-theme .CodeMirror-linenumber {
-	color: #ababab;
+	color: #fff;
 }
 
 .dark-theme .CodeMirror-cursor {
