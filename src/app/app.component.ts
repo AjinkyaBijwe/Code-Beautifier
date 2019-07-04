@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Global } from 'src/app/global';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { ConfirmResetComponent } from './confirm-reset/confirm-reset.component';
 
 @Component({
