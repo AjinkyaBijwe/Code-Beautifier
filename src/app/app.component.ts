@@ -45,7 +45,7 @@ export class AppComponent implements OnInit {
     beautify = () => {
         if (this.selectedLanguageType === 'sql') {
             if (this.sqlOptions['upperCase']) {
-                this.code = this.code.toUpperCase();
+                this.code = this.toUpperCaseQuoted(this.code);
             }
             const indent = '\xa0';
             this.sqlOptions['indent'] = indent.repeat(this.sqlOptions['indentation']);
@@ -57,6 +57,22 @@ export class AppComponent implements OnInit {
         }
         this.setLocalStorage(null, null);
     }
+
+    toUpperCaseQuoted = (str) => {
+        const regex = /((\".+\")|(\'.+\'))/g;
+        const replacements = [];
+        let index = 0;
+        str = str.replace(regex, (s) => {
+                replacements.push(s);
+                return '%S' + (index ++) + '%';
+            })
+            .toUpperCase()
+            .replace(/%S([0-9]+)%/g, function(s) {
+                const k = parseInt(s.match(/([0-9])+/)[0], 0);
+                return replacements[k];
+            });
+        return str;
+     }
 
     setOptions = () => {
         this.darkMode = false;
