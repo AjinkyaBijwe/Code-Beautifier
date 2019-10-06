@@ -4,9 +4,7 @@ body {
 }
 
 .title {
-    font-weight: 400;
-    height: 45px !important;
-    font: 400 18px/32px 'Roboto' ,"Helvetica Neue", sans-serif;
+	font-weight: 400;
 }
 
 .theme-toggle.mat-slide-toggle {
@@ -25,6 +23,10 @@ body {
 	padding: .75rem;
 	vertical-align: top;
 	border-top: 1px solid #dee2e6;
+}
+
+.title {
+	height: 60px;
 }
 
 #tabsize,
@@ -66,7 +68,7 @@ body {
     padding: 0px;
     margin-bottom: 8px;
     line-height: 1.5;
-    height: calc(100vh - 202px);
+    height: calc(100vh - 221px);
     display: flex;
     border-radius: 0px;
     border-radius: 4px;
@@ -162,7 +164,6 @@ input.material-input {
     position: absolute;
     right: 10px;
     border-radius: 2px;
-    line-height: 31px;
 }
 
 .options-checkbox label.mat-checkbox-layout {
